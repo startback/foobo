@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-01-11 10:42:18
+Date: 2018-01-11 15:55:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,15 +21,19 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `foo_action`;
 CREATE TABLE `foo_action` (
   `act_id` int(11) NOT NULL AUTO_INCREMENT,
-  `act_name` varchar(60) DEFAULT NULL,
-  `act_head_url` varchar(128) DEFAULT NULL,
+  `act_name` varchar(32) DEFAULT NULL,
   `act_time` datetime DEFAULT NULL,
-  `act_desc` text,
-  `act_platform` varchar(60) DEFAULT NULL COMMENT '平台名称',
-  `act_player_url` varchar(255) DEFAULT NULL COMMENT '平台播放地址',
+  `act_platform` text COMMENT '平台名称',
+  `left_num` smallint(6) DEFAULT NULL COMMENT '平台播放地址',
+  `right_num` smallint(6) DEFAULT NULL,
+  `left_player` varchar(32) DEFAULT NULL,
+  `right_player` varchar(32) DEFAULT NULL,
+  `left_player_logo` varchar(255) DEFAULT NULL,
+  `right_player_logo` varchar(255) DEFAULT NULL,
   `add_time` datetime DEFAULT NULL COMMENT '添加时间',
   `admin_id` int(6) DEFAULT NULL,
   `type_id` smallint(6) DEFAULT NULL,
+  `status_desc` varchar(20) DEFAULT NULL,
   `is_show` tinyint(4) DEFAULT '0' COMMENT '是否显示',
   `is_over` tinyint(4) DEFAULT '0' COMMENT '是否完赛',
   `is_hot` tinyint(4) DEFAULT '0' COMMENT '是否热门',
@@ -41,8 +45,29 @@ CREATE TABLE `foo_action` (
 -- ----------------------------
 -- Records of foo_action
 -- ----------------------------
-INSERT INTO `foo_action` VALUES ('6', '你来吧', '/Upload/zhibo/3f3f49fbb28652e1728688ef50ac4745.jpg', '2017-07-06 09:12:18', '', '非一般的感觉', 'http://baidu.com', '2017-07-17 09:12:30', '1', '8', '1', '0', '0', '0', '0');
-INSERT INTO `foo_action` VALUES ('7', '阿斯蒂芬123123', '/Upload/zhibo/0ad93d5c36f6b8c7749e0a329413a5ed.jpg', '2017-06-26 11:40:22', '', '左右斯柯达', 'myhome.com', '2018-01-11 10:07:04', '1', '9', '1', '0', '0', '0', '0');
+
+-- ----------------------------
+-- Table structure for foo_action_over
+-- ----------------------------
+DROP TABLE IF EXISTS `foo_action_over`;
+CREATE TABLE `foo_action_over` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `pic_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `desc` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `play_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  `admin_id` int(11) DEFAULT '0',
+  `is_show` tinyint(4) DEFAULT '0',
+  `is_hot` tinyint(4) DEFAULT '0',
+  `is_good` tinyint(4) DEFAULT '0',
+  `is_del` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of foo_action_over
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for foo_action_type
@@ -170,7 +195,7 @@ CREATE TABLE `foo_statistics` (
   `type` tinyint(4) DEFAULT '0',
   `link_from` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of foo_statistics
@@ -274,6 +299,11 @@ INSERT INTO `foo_statistics` VALUES ('115', '127.0.0.1', '2018-01-11 10:26:33', 
 INSERT INTO `foo_statistics` VALUES ('116', '127.0.0.1', '2018-01-11 10:37:45', '0', 'pc');
 INSERT INTO `foo_statistics` VALUES ('117', '127.0.0.1', '2018-01-11 10:37:46', '0', 'pc');
 INSERT INTO `foo_statistics` VALUES ('118', '127.0.0.1', '2018-01-11 10:37:49', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('119', '127.0.0.1', '2018-01-11 13:24:38', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('120', '127.0.0.1', '2018-01-11 14:22:03', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('121', '127.0.0.1', '2018-01-11 14:23:33', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('122', '127.0.0.1', '2018-01-11 14:23:34', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('123', '127.0.0.1', '2018-01-11 14:23:42', '0', 'pc');
 
 -- ----------------------------
 -- Table structure for foo_web_config

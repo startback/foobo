@@ -1,31 +1,35 @@
 ## sql文档
 
 
-* 1、 [foo_action(播放列表)](#1)
+* 1、 [foo_action(直播表)](#1)
 * 2、 [foo_action_type(直播分类)](#2)
 * 3、 [foo_admin(管理员)](#3)
 * 4、 [foo_admin_log(管理员日志)](#4)
 * 5、 [foo_role(管理员角色)](#5)
 * 6、 [foo_statistics(统计)](#6)
 * 7、 [foo_web_config(页面配置)](#7)
-
+* 8、 [foo_action_over(集锦)](#8)
 
 -----------------
 <span id="1"/>
-##### 1、 foo_action(用户表)
+##### 1、 foo_action(直播表)
 
 | 字段名 | 类型 | 默认 | 主键 | 备注 |
 |-------|------|------|-----|------|
 | act_id | int | - | key auto | ID |
-| act_name | varchar(60) | - | - | 名称 |
-| act_head_url | varchar(128) | - | - | 头像 |
+| act_name | varchar(32) | - | - | 直播赛事名 (如西甲等) |
 | act_time | datetime | - | - | 直播时间 |
-| act_desc | text | - | - | 简介 |
-| act_platform | varchar(60) | - | - | 平台名称 |
-| act_player_url | varchar(255) | - | - | 平台播放地址 |
+| act_platform | text | - | - | 平台及地址 {1:{'name':'','url':'http://ddd'},...} |
+| left_num | smallint | 0 | - | 左队得分 |
+| right_num | smallint | 0 | - | 右队得分 |
+| left_player | varchar(32) | - | - | 左队名 |
+| right_player | varchar(32) | - | - | 右队名 |
+| left_player_logo | varchar(255) | - | - | 左队LOGO |
+| right_player_logo | varchar(255) | - | - | 右队LOGO |
 | add_time | datetime | - | - | 添加时间 |
 | admin_id | int | - | - | 管理员ID |
 | type_id | smallint | - | - | 类型ID |
+| status_desc | varchar(20) | - | - | 赛事状态描述 |
 | is_show | tinyint | - | - | 是否展示 0:否 1:是 |
 | is_over | tinyint | - | - | 是否结束 0:否 1:是 |
 | is_hot | tinyint | - | - | 是否热门 0:否 1:是 |
@@ -108,3 +112,20 @@
 | key_name | varchar(20) | 0 | - | 字段 |
 | key_value | varchar(255) | - | - | 内容 |
 
+
+<span id="8"/>
+##### 8、 foo_action_over(集锦)
+
+| 字段名 | 类型 | 默认 | 主键 | 备注 |
+|-------|------|------|-----|------|
+| id | int | - | key auto | ID |
+| title | varchar(64) | - | - | 标题 |
+| pic_url | varchar(255) | - | - | 图片地址 |
+| desc | varchar(255) | - | - | 简价 |
+| play_url | varchar(255) | - | - | 播放地址 |
+| add_time | datetime | - | - | 添加时间 |
+| admin_id | int | - | - | 管理员ID |
+| is_show | tinyint | - | - | 是否展示 0:否 1:是 |
+| is_hot | tinyint | - | - | 是否热门 0:否 1:是 |
+| is_good | tinyint | - | - | 是否精华 0:否 1:是 |
+| is_del | tinyint | - | - | 是否删除 0:否 1:是 |
