@@ -51,6 +51,7 @@ class IndexController extends CommonController {
 	
 		//记录统计信息
 		$data['ip_address'] = com_get_ip();
+		$data['link_from'] = com_get_from();
 		$data['add_time'] = date('Y-m-d H:i:s',time());
 		M('statistics')->add($data);
 	
