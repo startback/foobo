@@ -3,13 +3,13 @@
 <body>
 
 <div class="panel admin-panel">
-    <div class="panel-head"><strong class="icon-reorder"> 直播列表</strong>
+    <div class="panel-head"><strong class="icon-reorder"> 集锦列表</strong>
     </div>
     <div class="padding border-bottom">
         <form action="" method="get">
             <input type="hidden" name="m" value="zadmin" />
-            <input type="hidden" name="c" value="action" />
-            <input type="hidden" name="a" value="action_list" />
+            <input type="hidden" name="c" value="action_over" />
+            <input type="hidden" name="a" value="over_list" />
             <ul class="search" style="padding-left:10px;">
                 <li>展示
                     <select name="is_show" class="input" style="width:60px; line-height:17px; display:inline-block">
@@ -18,15 +18,8 @@
                         <option <if condition="$search_state['is_show'] eq 0">selected='selected'</if> value="0">否</option>
                     </select>
                     &nbsp;&nbsp;
-                    结束
-                    <select name="is_recommend" class="input" style="width:60px; line-height:17px;display:inline-block">
-                        <option value="-1">选择</option>
-                        <option <if condition="$search_state['is_over'] eq 1">selected='selected'</if> value="1">是</option>
-                        <option <if condition="$search_state['is_over'] eq 0">selected='selected'</if> value="0">否</option>
-                    </select>
-                    &nbsp;&nbsp;
                     精华
-                    <select name="is_top" class="input" style="width:60px; line-height:17px;display:inline-block">
+                    <select name="is_good" class="input" style="width:60px; line-height:17px;display:inline-block">
                         <option value="-1">选择</option>
                         <option <if condition="$search_state['is_good'] eq 1">selected='selected'</if> value="1">是</option>
                         <option <if condition="$search_state['is_good'] eq 0">selected='selected'</if> value="0">否</option>
@@ -37,14 +30,6 @@
                         <option value="-1">选择</option>
                         <option <if condition="$search_state['is_hot'] eq 1">selected='selected'</if> value="1">是</option>
                         <option <if condition="$search_state['is_hot'] eq 0">selected='selected'</if> value="0">否</option>
-                    </select>
-                    &nbsp;&nbsp;
-                    类别
-                    <select name="type_id" class="input" style="width:120px; line-height:17px;display:inline-block">
-                        <option value="-1">选择</option>
-                        <volist name="types" id="vo">
-                            <option <if condition="$search_state['type_id'] eq $vo['type_id']">selected='selected'</if> value="{$vo.type_id}">{$vo.type_name}</option>
-                        </volist>
                     </select>
                 </li>
 
@@ -59,49 +44,35 @@
     <table class="table table-hover text-center">
         <tr>
             <th width="100" style="text-align:left; padding-left:20px;">ID</th>
-            <th>赛事</th>
-            <th>直播时间</th>
-            <th>左队</th>
-            <th>左队LOGO</th>
-            <th>左队得分</th>
-            <th>右队得分</th>
-            <th>右队LOGO</th>
-            <th>右队</th>
-            <th>赛事状态</th>
+            <th>标题</th>
+            <th>图像</th>
+            <th>简介</th>
+            <th>播放地址</th>
             <th>添加时间</th>
             <th>添加人</th>
-            <th>类型</th>
             <th>展示</th>
-            <th>结束</th>
             <th>热门</th>
             <th>精华</th>
             <th width="310">操作</th>
         </tr>
 
-        <if condition="$action_list">
-            <volist name="action_list" id="vo">
+        <if condition="$over_list">
+            <volist name="over_list" id="vo">
                 <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="{$vo.act_id}"/>{$vo.act_id}</td>
-                    <td>{$vo.act_name}</td>
-					<td>{$vo.act_time}</td>
-					<td>{$vo.left_player}</td>				
-					<td><img src="__ROOT__{$vo.left_player_logo}" width="50" height="50" /></td>
-					<td>{$vo.left_num}</td>	
-					<td>{$vo.right_num}</td>	
-					<td><img src="__ROOT__{$vo.right_player_logo}" width="50" height="50" /></td>
-					<td>{$vo.right_player}</td>
-					<td>{$vo.status_desc}</td>
+                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="{$vo.id}"/>{$vo.id}</td>
+                    <td>{$vo.title}</td>			
+					<td><img src="__ROOT__{$vo.pic_url}" width="50" height="50" /></td>
+					<td>{$vo.desc}</td>	
+					<td>{$vo.play_url}</td>	
 					<td>{$vo.add_time}</td>
-					<td>{$vo.admin_account}</td>
-                    <td>{$types[$vo['type_id']]['type_name']}</td>         
+					<td>{$vo.admin_account}</td>       
                     <td>{$state[$vo['is_show']]}</td>
-                    <td>{$state[$vo['is_over']]}</td>
                     <td>{$state[$vo['is_hot']]}</td>
                     <td>{$state[$vo['is_good']]}</td>
                     <td>
                         <div class="button-group">
-                            <a class="button border-main" href="__ROOT__/index.php?m=zadmin&c=action&a=action_edit&id={$vo.act_id}"><span class="icon-edit"></span> 修改</a>
-                            <a class="button border-red" href="javascript:void(0)" onclick="del({$vo.act_id})">
+                            <a class="button border-main" href="__ROOT__/index.php?m=zadmin&c=action_over&a=over_edit&id={$vo.id}"><span class="icon-edit"></span> 修改</a>
+                            <a class="button border-red" href="javascript:void(0)" onclick="del({$vo.id})">
                                 <span class="icon-trash-o"></span> 删除
                             </a>
                         </div>
@@ -112,19 +83,19 @@
                 <td style="text-align:left; padding:19px 0;padding-left:20px;"><input type="checkbox" id="checkall"/>
                     全选
                 </td>
-                <td colspan="18" style="text-align:left;padding-left:20px;">
+                <td colspan="11" style="text-align:left;padding-left:20px;">
                     <a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding:5px 15px;"
                        onclick="DelSelect()"> 删除</a>
                 </td>
             </tr>
             <tr>
-                <td colspan="18">
+                <td colspan="11">
                     <div class="pagelist">{$page_info}</div>
                 </td>
             </tr>
             <else/>
             <tr>
-                <td colspan="18" style="height: 80px;line-height: 80px;font-size: 20px;">
+                <td colspan="11" style="height: 80px;line-height: 80px;font-size: 20px;">
                     没有数据
                 </td>
             </tr>
@@ -139,7 +110,7 @@
         if(confirm("您确定要删除吗?")) {
             $.ajax({
                 type: 'post',
-                url: '__ROOT__/index.php?m=zadmin&c=action&a=action_del',
+                url: '__ROOT__/index.php?m=zadmin&c=action_over&a=over_del',
                 data: {ids: id},
                 dataType: 'text',
                 success: function(data){
@@ -186,7 +157,7 @@
 
             $.ajax({
                 type: 'post',
-                url: '__ROOT__/index.php?m=zadmin&c=action&a=action_del',
+                url: '__ROOT__/index.php?m=zadmin&c=action_over&a=over_del',
                 data: {ids: ids},
                 dataType: 'text',
                 success: function(data){

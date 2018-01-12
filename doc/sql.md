@@ -121,7 +121,7 @@
 | id | int | - | key auto | ID |
 | title | varchar(64) | - | - | 标题 |
 | pic_url | varchar(255) | - | - | 图片地址 |
-| desc | varchar(255) | - | - | 简价 |
+| desc | varchar(255) | - | - | 简介 |
 | play_url | varchar(255) | - | - | 播放地址 |
 | add_time | datetime | - | - | 添加时间 |
 | admin_id | int | - | - | 管理员ID |

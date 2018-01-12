@@ -19,14 +19,14 @@
                     </select>
                     &nbsp;&nbsp;
                     结束
-                    <select name="is_recommend" class="input" style="width:60px; line-height:17px;display:inline-block">
+                    <select name="is_over" class="input" style="width:60px; line-height:17px;display:inline-block">
                         <option value="-1">选择</option>
                         <option <if condition="$search_state['is_over'] eq 1">selected='selected'</if> value="1">是</option>
                         <option <if condition="$search_state['is_over'] eq 0">selected='selected'</if> value="0">否</option>
                     </select>
                     &nbsp;&nbsp;
                     精华
-                    <select name="is_top" class="input" style="width:60px; line-height:17px;display:inline-block">
+                    <select name="is_good" class="input" style="width:60px; line-height:17px;display:inline-block">
                         <option value="-1">选择</option>
                         <option <if condition="$search_state['is_good'] eq 1">selected='selected'</if> value="1">是</option>
                         <option <if condition="$search_state['is_good'] eq 0">selected='selected'</if> value="0">否</option>
