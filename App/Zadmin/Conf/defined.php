@@ -1,6 +1,13 @@
 <?php
 return array(
 
+	//各页面显示页数配置
+	'PAGE_ADMIN'              =>     10,        //管理员
+	'PAGE_ADMIN_LOG'          =>     10,        //管理员日志
+	'PAGE_ACTION_OVER'        =>     10,        //集锦
+	'PAGE_ACTION'             =>     10,        //直播
+
+
     //不需登录的
     'NO_LOGIN'      =>   array(
         'index/login',
@@ -42,6 +49,16 @@ return array(
             )
         ),
         array(
+            'title'  => 'action_over',
+            'name'   => '集锦管理',
+            'child'  => array(
+                array('title'=>'over_list','name' => '集锦列表'),
+                array('title'=>'over_add', 'name' => '集锦添加'),
+                array('title'=>'over_edit','name' => '集锦修改'),
+                array('title'=>'over_del', 'name' => '集锦删除'),
+            )
+        ),		
+        array(
             'title'  => 'admin',
             'name'   => '权限管理',
             'child'  => array(
@@ -79,6 +96,14 @@ return array(
 				"action_add" => array("发布直播","index.php?m=zadmin&c=action&a=action_add")
 			)
 		),
+		"action_over" => array(
+			"name" =>  "集锦管理",
+			"l_icon" =>  "icon-star",
+			"data" =>  array(
+				"over_list" => array("集锦列表","index.php?m=zadmin&c=action_over&a=over_list"),
+				"over_add" => array("添加集锦","index.php?m=zadmin&c=action_over&a=over_add")
+			)
+		),		
 		"admin" => array(
 			"name" =>  "权限管理",
 			"l_icon" =>  "icon-key",
