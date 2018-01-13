@@ -3,6 +3,7 @@
 .top{
 	width:100%;
 	height:42px;
+	margin-bottom:5px;
 }
 
 .top .nav{
@@ -44,25 +45,6 @@
 	margin-top:10px;
 }
 
-.module  .head {    
-	height: 31px;
-    border-top: 1px solid lightgray;
-    border-bottom: 1px solid #d5d5d5;
-    background: #F7F7F7;
-}
-
-.module  .head h2 {
-    font-size: 1em;
-    font-weight: normal;
-    display: inline-block;
-    text-align: center;
-    float: left;
-    width: auto;
-    padding: 0 10px 0 20px;
-    height: 31px;
-    line-height: 31px;
-}
-
 .module a{
 	display:block;
 	text-decoration:none;
@@ -86,23 +68,9 @@
 }
 
 .module  td {
-    text-align: center;
     padding: 5px 0;
     color: #000;
     font-size: 0.9em;
-}
-
-.module .s_name {
-    font-size: 0.825em;
-}
-
-.module .s_keyword {
-    color: #888;
-    max-height: 30px;
-    overflow: hidden;
-    font-size: 0.825em;
-    margin-top: 5px;
-    line-height: 15px;
 }
 
 .module table img {
@@ -110,60 +78,18 @@
     height: 40px;
 }
 
-.module .remind  {
-    display: inline-block;
-    width: 50px;
-    color: #E04E4C;
-    font-size: 0.9em;
-}
-
-.module .remind img {
-    width: 25px;
-    height: 25px;
-}
-
 .content .td_1{
+	text-align: center;
 	width:15%;
 }
 
 .content .td_2{
-	width:20%;
+	text-align: left;
+	line-height:18px;
+	width:85%;
+	vertical-align:0;
 }
 
-.content .td_3{
-	width:30%;
-}
-
-.content .td_4{
-	width:20%;
-}
-
-.content .td_5{
-	width:15%;
-}
-	
-/***********  info ***************/	
-.content .link{
-	margin:45px auto;
-	text-align:center;	
-}	
-	
-.content .link .link_info{	
-	border:none;
-	color:blue;
-	margin:5px auto;
-	font-size:18px;	
-}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -41,9 +41,9 @@
 		</table>	
 
 		<if condition="$info['act_platform_arr']">
-			<div style="margin:45px auto;text-align:center;">
+			<div class="link">
 				<volist name="info.act_platform_arr" key="key" id="item">	
-					<a style="border:none;color:blue;margin:5px auto;font-size:18px;" target="_blank" href="{$item.url}">{$item.name}</a>
+					<a class="link_info" target="_blank" href="{$item.url}">{$item.name}</a>
 				</volist>
 			</div>
 		</if>

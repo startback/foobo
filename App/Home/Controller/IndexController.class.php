@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends CommonController {
 
+	//直播
     public function index(){
 		$now_time = date('Y-m-d H:i:s',time());
 				
@@ -62,7 +63,7 @@ class IndexController extends CommonController {
 		$this->display();
     }
 
-	
+	//直播详情
 	public function info(){
 		
 		$act_id = isset($_GET['id'])?intval($_GET['id']):0;
@@ -89,6 +90,17 @@ class IndexController extends CommonController {
 	}
 	
 	
+	//集锦
+	public function aover(){
+		
+		$action = array();
+		$where = "1=1";
+        $action = M('action_over')->where($where)->order('id desc')->select();		
+		
+		$this->assign('action',$action);
+		$this->display();
+		
+	}
 	
 	
 	
