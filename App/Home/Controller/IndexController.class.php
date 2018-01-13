@@ -29,25 +29,27 @@ class IndexController extends CommonController {
 				if($now_time >= $value['act_time']) $act_l[$key]['is_start'] = 1;
 			}
 		}
-		
+	
 		$act_list = array();
 		if($act_l){
 			foreach($act_l as $value){
+				$value['act_desc'] = '';
+				if($value['is_over'] == 1){
+					$value['act_desc'] = $value['left_num'].":".$value['right_num'];
+				}else{
+					if($value['act_platform']){
+						$act_arr = json_decode($value['act_platform'],true);
+						foreach($act_arr as $val){
+							$value['act_desc'] .= $val['name']." ";
+						}
+					}
+				}
 				$act_list[$value['date']]['data'][] = $value;
 				$act_list[$value['date']]['week_day'] = $value['week'];
 				$act_list[$value['date']]['month_date'] = date('m月d日',strtotime($value['act_time']));
 			}	
 			ksort($act_list);
 		}
-	
-		$infos = array();
-		$web_info = M('web_config')->select();
-		if($web_info){
-			foreach($web_info as $value){
-				$infos[$value['key_name']] = $value['key_value'];
-			}
-		}
-		$this->assign('infos',$infos);
 	
 		//记录统计信息
 		$data['ip_address'] = com_get_ip();
@@ -60,4 +62,65 @@ class IndexController extends CommonController {
 		$this->display();
     }
 
+	
+	public function info(){
+		
+		$act_id = isset($_GET['id'])?intval($_GET['id']):0;
+		$info = array();
+		if($act_id){
+			
+			$where = C('DB_PREFIX').'action.act_id='.$act_id;
+			$info = M('action')->field(C('DB_PREFIX').'action.*,'.C('DB_PREFIX').'action_type.type_name,'.C('DB_PREFIX').'action_type.type_desc')->join(C('DB_PREFIX').'action_type ON '.C('DB_PREFIX').'action.type_id = '.C('DB_PREFIX').'action_type.type_id')->where($where)->find();	
+			
+			$info['act_desc'] = '';
+			if($info['act_platform']){
+				$info['act_platform_arr'] = json_decode($info['act_platform'],true);
+				foreach($info['act_platform_arr'] as $val){
+					$info['act_desc'] .= $val['name']." ";
+				}			
+			}
+		
+			if($info['is_over'] == 1) $info['act_desc'] = $info['left_num'].":".$info['right_num'];
+				
+		}
+		
+		$this->assign('info',$info);
+		$this->display();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
