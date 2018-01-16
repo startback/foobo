@@ -12,6 +12,19 @@ $(document).ready(function() {
 	var title = "pv/ip统计";        //统计图标标题
 	j.jqplot.diagram.base("chart1", data, line_title, title, x, x_label, y_label, data_max, 1);
 	j.jqplot.diagram.base("chart2", data, line_title, title, x, x_label, y_label, data_max, 2);
+	
+	
+	
+	var data_link = [[{$nums.today_8.unknow},{$nums.today_7.unknow},{$nums.today_6.unknow},{$nums.today_5.unknow},{$nums.today_4.unknow},{$nums.today_3.unknow},{$nums.today_2.unknow},{$nums.today_1.unknow},{$nums.today.unknow}],[{$nums.today_8.pc},{$nums.today_7.pc},{$nums.today_6.pc},{$nums.today_5.pc},{$nums.today_4.pc},{$nums.today_3.pc},{$nums.today_2.pc},{$nums.today_1.pc},{$nums.today.pc}],[{$nums.today_8.mac},{$nums.today_7.mac},{$nums.today_6.mac},{$nums.today_5.mac},{$nums.today_4.mac},{$nums.today_3.mac},{$nums.today_2.mac},{$nums.today_1.mac},{$nums.today.mac}],[{$nums.today_8.iphone},{$nums.today_7.iphone},{$nums.today_6.iphone},{$nums.today_5.iphone},{$nums.today_4.iphone},{$nums.today_3.iphone},{$nums.today_2.iphone},{$nums.today_1.iphone},{$nums.today.iphone}],[{$nums.today_8.android},{$nums.today_7.android},{$nums.today_6.android},{$nums.today_5.android},{$nums.today_4.android},{$nums.today_3.android},{$nums.today_2.android},{$nums.today_1.android},{$nums.today.android}],[{$nums.today_8.ipad},{$nums.today_7.ipad},{$nums.today_6.ipad},{$nums.today_5.ipad},{$nums.today_4.ipad},{$nums.today_3.ipad},{$nums.today_2.ipad},{$nums.today_1.ipad},{$nums.today.ipad}]];
+	var data_max_link = {$max_num_link};              //Y轴最大刻度
+	var line_title_link = ["unknow","pc","mac","iphone","android","ipad"];   //曲线名称
+	var y_label_link = "访问量";         //Y轴标题
+	var x_label_link = "日期";           //X轴标题
+	var x_link = ['{$days.today_8}','{$days.today_7}','{$days.today_6}','{$days.today_5}','{$days.today_4}','{$days.today_3}','{$days.today_2}','{$days.today_1}','{$days.today}'];    //定义X轴刻度值
+	var title_link = "来源统计";        //统计图标标题
+	j.jqplot.diagram.base("chart3", data_link, line_title_link, title_link, x_link, x_label_link, y_label_link, data_max_link, 1);	
+	j.jqplot.diagram.base("chart4", data_link, line_title_link, title_link, x_link, x_label_link, y_label_link, data_max_link, 2);	
+	
 });
 </script>
 
@@ -20,5 +33,11 @@ $(document).ready(function() {
 	<br/>
 	<br/>
 	<div id="chart2"></div>
+	<br/>
+	<br/>
+	<div id="chart3"></div>	
+	<br/>
+	<br/>
+	<div id="chart4"></div>		
 </body>
 </html>

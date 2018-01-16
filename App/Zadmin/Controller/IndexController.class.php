@@ -69,17 +69,25 @@ class IndexController extends CommonController {
 		$nums['today_8'] = $this->get_day_pvip_num($days['today_8'],$days['today_8']);
 
 		$max_num = 0;
+		$max_num_link = 0;
 		foreach($nums as $value){
 			if($value['pv_num'] > $max_num) $max_num = $value['pv_num'];
+			$link_num = max($value['unknow'],$value['pc'],$value['mac'],$value['iphone'],$value['android'],$value['ipad']);
+			if($link_num > $max_num_link) $max_num_link = $link_num;
 		}
 		if($max_num > 20){
-			$max_num = intval($max_num * 1.1);
+			$max_num = intval($max_num * 1.2);
 		}else{
-			$max_num += 2;
+			$max_num += 5;
 		}
-		
+		if($max_num_link > 20){
+			$max_num_link = intval($max_num_link * 1.2);
+		}else{
+			$max_num_link += 5;
+		}		
 		
 		$this->assign('max_num',$max_num);
+		$this->assign('max_num_link',$max_num_link);
 		$this->assign('days',$days);
 		$this->assign('nums',$nums);
 		
@@ -174,9 +182,10 @@ class IndexController extends CommonController {
 		$start_time = $s_day." 00:00:00";
 		$end_time = $e_day." 24:00:00";
 	
+		//IP/PV
 		$sql = "select count(id) num from ".C('DB_PREFIX')."statistics where add_time>='".$start_time."' and add_time<'".$end_time."' group by ip_address";
 		$res = M('statistics')->query($sql);			
-		
+
 		if($res){
 			$arr['ip_num'] = count($res);
 			foreach($res as $value){
@@ -187,6 +196,27 @@ class IndexController extends CommonController {
 			$arr['ip_num'] = 0;
 		}
 		
+		//客户端来源
+		$sql_f = "select count(id) num,link_from from ".C('DB_PREFIX')."statistics where add_time>='".$start_time."' and add_time<'".$end_time."' group by link_from";
+		$link_froms = M('statistics')->query($sql_f);	
+
+		$arr['unknow'] = 0;
+		$arr['pc'] = 0;
+		$arr['mac'] = 0;
+		$arr['iphone'] = 0;
+		$arr['android'] = 0;
+		$arr['ipad'] = 0;
+		
+		if($link_froms){
+			foreach($link_froms as $val){
+				if($val['link_from']){
+					$arr[$val['link_from']] = $val['num'];
+				}else{
+					$arr['unknow'] = $val['num'];
+				}
+			}
+		}
+	
 		return $arr;
 	}
 	
