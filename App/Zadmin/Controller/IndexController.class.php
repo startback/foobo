@@ -209,10 +209,10 @@ class IndexController extends CommonController {
 		
 		if($link_froms){
 			foreach($link_froms as $val){
-				if($val['link_from']){
+				if($val['link_from'] && $val['link_from'] != 'unknow'){
 					$arr[$val['link_from']] = $val['num'];
 				}else{
-					$arr['unknow'] = $val['num'];
+					$arr['unknow'] += $val['num'];
 				}
 			}
 		}
