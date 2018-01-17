@@ -6,6 +6,7 @@ return array(
 	'PAGE_ADMIN_LOG'          =>     10,        //管理员日志
 	'PAGE_ACTION_OVER'        =>     10,        //集锦
 	'PAGE_ACTION'             =>     10,        //直播
+	'PAGE_PLAYERS'            =>     10,        //球队
 
 
     //不需登录的
@@ -46,6 +47,10 @@ return array(
                 array('title'=>'action_add', 'name' => '直播添加'),
                 array('title'=>'action_edit','name' => '直播修改'),
                 array('title'=>'action_del', 'name' => '直播删除'),
+                array('title'=>'players_list','name' => '球队列表'),
+                array('title'=>'players_add', 'name' => '球队添加'),
+                array('title'=>'players_edit','name' => '球队修改'),
+                array('title'=>'players_del', 'name' => '球队删除'),				
             )
         ),
         array(
@@ -93,7 +98,8 @@ return array(
 			"data" =>  array(
 				"atype" => array("直播分类","index.php?m=zadmin&c=action&a=atype"),
 				"action_list" => array("直播列表","index.php?m=zadmin&c=action&a=action_list"),
-				"action_add" => array("发布直播","index.php?m=zadmin&c=action&a=action_add")
+				"action_add" => array("发布直播","index.php?m=zadmin&c=action&a=action_add"),
+				"players_list" => array("球队列表","index.php?m=zadmin&c=action&a=players_list")
 			)
 		),
 		"action_over" => array(

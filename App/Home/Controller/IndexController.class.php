@@ -31,9 +31,25 @@ class IndexController extends CommonController {
 			}
 		}
 	
+		//球队列表
+		$players_arr = array();
+		$players = M('players')->select();
+		if($players){
+			foreach($players as $val){
+				$players_arr[$val['p_id']] = $val;
+			}
+		}	
+	
 		$act_list = array();
 		if($act_l){
-			foreach($act_l as $value){
+			foreach($act_l as $value){			
+				if($players_arr){
+					$value['left_player'] = $players_arr[$value['left_p_id']]['p_name'];
+					$value['left_player_logo'] = $players_arr[$value['left_p_id']]['p_logo'];
+					$value['right_player'] = $players_arr[$value['right_p_id']]['p_name'];
+					$value['right_player_logo'] = $players_arr[$value['right_p_id']]['p_logo'];					
+				}				
+
 				$value['act_desc'] = '';
 				if($value['is_over'] == 1){
 					$value['act_desc'] = $value['left_num'].":".$value['right_num'];

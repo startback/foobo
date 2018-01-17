@@ -6,7 +6,16 @@
 <div class="panel admin-panel">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span> 发表直播</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="" enctype="multipart/form-data">
+        <form method="post" class="form-x" action="">	
+            <div class="form-group">
+                <div class="label">
+                    <label>直播ID：</label>
+                </div>
+                <div class="field">
+                    <input type="number" class="input w50" value="" name="act_id" data-validate="required:请输入直播ID"/>
+                    <div class="tips"></div>
+                </div>
+            </div>		
             <div class="form-group">
                 <div class="label">
                     <label>直播赛事名：</label>
@@ -18,19 +27,29 @@
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>左队名：</label>
+                    <label>左队：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" value="" name="left_player" data-validate="required:请输入左边比赛队名"/>
+                    <select name="left_p_id" class="input w50" data-validate="required:请选择球队">
+                        <option value="">请选择球队</option>
+                        <volist name="players" id="vo">
+                            <option value="{$vo.p_id}">{$vo.p_name}</option>
+                        </volist>
+                    </select>
                     <div class="tips"></div>
                 </div>
             </div>			
             <div class="form-group">
                 <div class="label">
-                    <label>右队名：</label>
+                    <label>右队：</label>
                 </div>
                 <div class="field">
-                    <input type="text" class="input w50" value="" name="right_player" data-validate="required:请输入右边比赛队名"/>
+                    <select name="right_p_id" class="input w50" data-validate="required:请选择球队">
+                        <option value="">请选择球队</option>
+                        <volist name="players" id="vo">
+                            <option value="{$vo.p_id}">{$vo.p_name}</option>
+                        </volist>
+                    </select>
                     <div class="tips"></div>
                 </div>
             </div>			
@@ -51,29 +70,7 @@
                     <input type="number" class="input w50" value="0" name="right_num" data-validate="required:请输入右队得分"/>
                     <div class="tips"></div>
                 </div>
-            </div>				
-			<div class="form-group">
-                <div class="label">
-                    <label>左队LOGO：</label>
-                </div>
-                <div class="field">
-                    <div style="width:90px;height: 90px;margin-right: 35px;float: left;position: relative;">
-                        <img src="__PUBLIC__/Zadmin/images/add.png" style="width: 100%;height: 100%;" />
-                        <input type="file" onchange="change_img(this)" style="width:90px;height: 90px;opacity: 0;position: absolute;top:0;left: 0;" name="image[]">
-                    </div>
-                </div>
-            </div>
-			<div class="form-group">
-                <div class="label">
-                    <label>右队LOGO：</label>
-                </div>
-                <div class="field">
-                    <div style="width:90px;height: 90px;margin-right: 35px;float: left;position: relative;">
-                        <img src="__PUBLIC__/Zadmin/images/add.png" style="width: 100%;height: 100%;" />
-                        <input type="file" onchange="change_img(this)" style="width:90px;height: 90px;opacity: 0;position: absolute;top:0;left: 0;" name="image[]">
-                    </div>
-                </div>
-            </div>			
+            </div>						
             <div class="form-group">
                 <div class="label">
                     <label>比赛时间：</label>
@@ -175,17 +172,6 @@
 </div>
 
 <script>
-    function change_img(obj){
-        var files = obj.files;
-        if (!files.length || !window.FileReader) return;
-        if (/^image/.test( files[0].type)){
-            var reader = new FileReader();
-            reader.readAsDataURL(files[0]);
-            reader.onloadend = function(){
-                $(obj).siblings('img').attr('src',this.result);
-            }
-        }
-    }
 				
 	function add_plat_form(id){
 		var str =  '';

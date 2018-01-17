@@ -485,6 +485,18 @@ vertical-align:1px;
 </thead>
 <tbody>
 <tr>
+<td>do_id</td>
+<td>int</td>
+<td>yes</td>
+<td>0写入 1更新</td>
+</tr>
+<tr>
+<td>act_id</td>
+<td>str</td>
+<td>yes</td>
+<td>赛事ID(最多15位)</td>
+</tr>
+<tr>
 <td>act_name</td>
 <td>str</td>
 <td>yes</td>
@@ -539,16 +551,16 @@ vertical-align:1px;
 <td>右队得分</td>
 </tr>
 <tr>
-<td>left_player</td>
+<td>left_p_id</td>
 <td>str</td>
 <td>yes</td>
-<td>左队名</td>
+<td>左队</td>
 </tr>
 <tr>
-<td>right_player</td>
+<td>right_p_id</td>
 <td>str</td>
 <td>yes</td>
-<td>右队名</td>
+<td>右队</td>
 </tr>
 <tr>
 <td>status_desc</td>
@@ -564,7 +576,6 @@ vertical-align:1px;
 </tr>
 </tbody>
 </table>
-<p>图片传输 http协议 参数: images[0]为左队 images[1]为右队</p>
 <p>返回：</p>
 <pre><code>{
   &quot;code&quot;: 0,

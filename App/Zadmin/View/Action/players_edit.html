@@ -1,0 +1,75 @@
+<include file='Common:top'/>
+
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span> 修改球队</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="" enctype="multipart/form-data">
+			<input type="hidden" name="p_id" value="{$info.p_id}" />
+		
+            <div class="form-group">
+                <div class="label">
+                    <label>球队ID：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="{$info.p_id}" disabled />
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>球队名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="{$info.p_name}" name="p_name" data-validate="required:请输入球队名"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+			<div class="form-group">
+                <div class="label">
+                    <label>球队LOGO：</label>
+                </div>
+                <div class="field">
+                    <div style="width:90px;height: 90px;margin-right: 35px;float: left;position: relative;">
+                        <img <if condition="$info['p_logo']">src="__ROOT__{$info.p_logo}"<else />src="__PUBLIC__/Zadmin/images/add.png"</if> style="width: 100%;height: 100%;" />
+                        <input type="file" onchange="change_img(this)" style="width:90px;height: 90px;opacity: 0;position: absolute;top:0;left: 0;" name="image[]">
+                    </div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>球队描述：</label>
+                </div>
+                <div class="field">
+                    <textarea class="input" name="p_desc" style=" height:90px;">{$info.p_desc}</textarea>
+                    <div class="tips"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 修改</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function change_img(obj){
+        var files = obj.files;
+        if (!files.length || !window.FileReader) return;
+        if (/^image/.test( files[0].type)){
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onloadend = function(){
+                $(obj).siblings('img').attr('src',this.result);
+            }
+        }
+    }
+	
+</script>
+</body>
+</html>

@@ -11,6 +11,8 @@ class IndexController extends CommonController {
 		$res['data'] = array();
 		
         if($_POST){
+			$do_id = isset($_POST['do_id'])?intval($_POST['do_id']):0;
+			
             $data['act_name'] = isset($_POST['act_name'])?trim($_POST['act_name']):'';
             $data['type_id'] = isset($_POST['type_id'])?intval($_POST['type_id']):0;
             $data['act_time'] = isset($_POST['act_time'])?trim($_POST['act_time']):'';
@@ -18,27 +20,38 @@ class IndexController extends CommonController {
             $data['is_hot'] = isset($_POST['is_hot'])?intval($_POST['is_hot']):0;
             $data['is_show'] = isset($_POST['is_show'])?intval($_POST['is_show']):0;
             $data['is_over'] = isset($_POST['is_over'])?intval($_POST['is_over']):0;
-            $data['add_time'] = date('Y-m-d H:i:s',time());
-            $data['admin_id'] = 0;  //爬虫数据填充 待定
 			$data['left_num'] = isset($_POST['left_num'])?intval($_POST['left_num']):0;
 			$data['right_num'] = isset($_POST['right_num'])?intval($_POST['right_num']):0;
-			$data['left_player'] = isset($_POST['left_player'])?trim($_POST['left_player']):'';
-			$data['right_player'] = isset($_POST['right_player'])?trim($_POST['right_player']):'';
+			$data['left_p_id'] = isset($_POST['left_player'])?intval($_POST['left_player']):0;
+			$data['right_p_id'] = isset($_POST['right_player'])?intval($_POST['right_player']):0;
 			$data['status_desc'] = isset($_POST['status_desc'])?trim($_POST['status_desc']):'';			
 			$data['act_platform'] = isset($_POST['act_platform'])?trim($_POST['act_platform']):'';
 			
-            if($_FILES){
-                $images = com_save_file($_FILES,'/Upload/zhibo');
-                $data['left_player_logo'] = $images[0];
-                $data['right_player_logo'] = $images[1];
-            }
-
-            if(M('action')->add($data)){
-                
-            }else{
-				$res['code'] = 1;
-				$res['msg'] = '插入数据失败';
-            }
+			if($do_id == 1){
+				$act_id = isset($_POST['act_id'])?trim($_POST['act_id']):'';
+				
+				if(M('action')->where("act_id='".$act_id."'")->save($data)){
+					$res['msg'] = '更新数据成功';
+				}else{
+					$res['code'] = 1;
+					$res['msg'] = '更新数据失败';
+				}				
+			}else if($do_id == 0){
+				$data['act_id'] = isset($_POST['act_id'])?trim($_POST['act_id']):'';
+				$data['add_time'] = date('Y-m-d H:i:s',time());
+				$data['admin_id'] = 0;  //爬虫数据填充 待定	
+				
+				if(M('action')->add($data)){
+					$res['msg'] = '插入数据成功';
+				}else{
+					$res['code'] = 1;
+					$res['msg'] = '插入数据失败';
+				}				
+			}else{
+				$res['code'] = 3;
+				$res['msg'] = '操作类型错误';				
+			}
+			
         }else{
 			$res['code'] = 2;
 			$res['msg'] = '请求方式错误';

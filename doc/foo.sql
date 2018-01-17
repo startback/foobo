@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-01-11 15:55:34
+Date: 2018-01-17 10:33:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,16 +20,14 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `foo_action`;
 CREATE TABLE `foo_action` (
-  `act_id` int(11) NOT NULL AUTO_INCREMENT,
+  `act_id` varchar(15) NOT NULL,
   `act_name` varchar(32) DEFAULT NULL,
   `act_time` datetime DEFAULT NULL,
   `act_platform` text COMMENT '平台名称',
   `left_num` smallint(6) DEFAULT NULL COMMENT '平台播放地址',
   `right_num` smallint(6) DEFAULT NULL,
-  `left_player` varchar(32) DEFAULT NULL,
-  `right_player` varchar(32) DEFAULT NULL,
-  `left_player_logo` varchar(255) DEFAULT NULL,
-  `right_player_logo` varchar(255) DEFAULT NULL,
+  `left_p_id` int(32) DEFAULT NULL,
+  `right_p_id` int(32) DEFAULT NULL,
   `add_time` datetime DEFAULT NULL COMMENT '添加时间',
   `admin_id` int(6) DEFAULT NULL,
   `type_id` smallint(6) DEFAULT NULL,
@@ -40,11 +38,12 @@ CREATE TABLE `foo_action` (
   `is_good` tinyint(4) DEFAULT '0' COMMENT '是否精华',
   `is_del` tinyint(4) DEFAULT '0' COMMENT '软删除',
   PRIMARY KEY (`act_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of foo_action
 -- ----------------------------
+INSERT INTO `foo_action` VALUES ('145646412511111', '你来吧!', '2018-01-17 10:19:59', '[{\"name\":\"ad\",\"url\":\"asdf44\"},{\"name\":\"asdf\",\"url\":\"asdfa\"}]', '0', '0', '0', '0', '2018-01-17 10:20:09', '1', '8', '', '1', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for foo_action_over
@@ -63,11 +62,12 @@ CREATE TABLE `foo_action_over` (
   `is_good` tinyint(4) DEFAULT '0',
   `is_del` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of foo_action_over
 -- ----------------------------
+INSERT INTO `foo_action_over` VALUES ('3', '增加忽略文件夹', '/Upload/over/497c57790a7b4af7ea73dfeb3396d149.jpg', '梦工厂载', '苛', '2018-01-12 17:01:10', '1', '1', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for foo_action_type
@@ -111,7 +111,7 @@ CREATE TABLE `foo_admin` (
 -- ----------------------------
 -- Records of foo_admin
 -- ----------------------------
-INSERT INTO `foo_admin` VALUES ('1', 'admin', 0xE10ADC3949BA59ABBE56E057F20F883E, '0', '超级管理员', '15811867789', '84656855@qq.com', '1', '2016-11-11', '2016-11-04 23:37:33', '2018-01-11 10:04:58', '走走停停，一路顺景', '127.0.0.1');
+INSERT INTO `foo_admin` VALUES ('1', 'admin', 0xE10ADC3949BA59ABBE56E057F20F883E, '0', '超级管理员', '15811867789', '84656855@qq.com', '1', '2016-11-11', '2016-11-04 23:37:33', '2018-01-17 10:09:34', '走走停停，一路顺景', '127.0.0.1');
 INSERT INTO `foo_admin` VALUES ('4', 'good', 0xE10ADC3949BA59ABBE56E057F20F883E, '2', null, null, null, '0', null, '2016-11-11 22:44:27', null, null, null);
 INSERT INTO `foo_admin` VALUES ('5', 'admin123', 0xE10ADC3949BA59ABBE56E057F20F883E, '0', '', '', '', '0', '2017-04-05', '2017-07-11 10:14:32', null, '', null);
 
@@ -126,7 +126,7 @@ CREATE TABLE `foo_admin_log` (
   `admin_id` smallint(6) DEFAULT NULL,
   `ip_address` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of foo_admin_log
@@ -165,6 +165,62 @@ INSERT INTO `foo_admin_log` VALUES ('31', '2018-01-11 10:00:24', 'admin 登录�
 INSERT INTO `foo_admin_log` VALUES ('32', '2018-01-11 10:04:58', 'admin 登录系统', '1', '127.0.0.1');
 INSERT INTO `foo_admin_log` VALUES ('33', '2018-01-11 10:06:10', '修改直播，编号为:6', '1', '127.0.0.1');
 INSERT INTO `foo_admin_log` VALUES ('34', '2018-01-11 10:07:04', '增加直播，编号为:7', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('35', '2018-01-12 10:53:10', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('36', '2018-01-12 14:15:07', '增加直播，编号为:1', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('37', '2018-01-12 14:23:57', '增加直播，编号为:2', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('38', '2018-01-12 14:34:14', '删除直播，编号为:2', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('39', '2018-01-12 14:34:20', '删除直播，编号为:1', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('40', '2018-01-12 14:37:04', '增加直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('41', '2018-01-12 14:51:53', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('42', '2018-01-12 14:52:39', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('43', '2018-01-12 14:53:28', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('44', '2018-01-12 14:53:38', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('45', '2018-01-12 14:54:16', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('46', '2018-01-12 14:54:20', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('47', '2018-01-12 14:55:58', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('48', '2018-01-12 14:59:00', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('49', '2018-01-12 14:59:57', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('50', '2018-01-12 15:00:06', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('51', '2018-01-12 15:01:33', '增加直播，编号为:4', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('52', '2018-01-12 15:08:33', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('53', '2018-01-12 15:10:10', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('54', '2018-01-12 15:18:13', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('55', '2018-01-12 15:19:00', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('56', '2018-01-12 15:21:39', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('57', '2018-01-12 15:30:54', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('58', '2018-01-12 16:35:07', '增加集锦，ID为:1', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('59', '2018-01-12 16:57:56', '删除集锦，ID为:1', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('60', '2018-01-12 16:58:11', '增加集锦，ID为:2', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('61', '2018-01-12 16:59:15', '删除集锦，ID为:2', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('62', '2018-01-12 17:01:10', '增加集锦，ID为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('63', '2018-01-12 17:11:37', '修改集锦，ID为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('64', '2018-01-12 17:12:42', '修改集锦，ID为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('65', '2018-01-12 17:14:55', '修改直播，编号为:4', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('66', '2018-01-12 17:15:04', '修改直播，编号为:3', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('67', '2018-01-15 09:39:41', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('68', '2018-01-16 14:32:35', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('69', '2018-01-17 10:09:34', 'admin 登录系统', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('70', '2018-01-17 10:20:09', '增加直播，编号为:1', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('71', '2018-01-17 10:27:26', '修改直播，编号为:1456464', '1', '127.0.0.1');
+INSERT INTO `foo_admin_log` VALUES ('72', '2018-01-17 10:29:06', '修改直播，编号为:1456464', '1', '127.0.0.1');
+
+-- ----------------------------
+-- Table structure for foo_players
+-- ----------------------------
+DROP TABLE IF EXISTS `foo_players`;
+CREATE TABLE `foo_players` (
+  `p_id` int(11) NOT NULL,
+  `p_name` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
+  `p_desc` text CHARACTER SET utf8,
+  `p_logo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`p_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of foo_players
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for foo_role
@@ -195,7 +251,7 @@ CREATE TABLE `foo_statistics` (
   `type` tinyint(4) DEFAULT '0',
   `link_from` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of foo_statistics
@@ -304,6 +360,29 @@ INSERT INTO `foo_statistics` VALUES ('120', '127.0.0.1', '2018-01-11 14:22:03', 
 INSERT INTO `foo_statistics` VALUES ('121', '127.0.0.1', '2018-01-11 14:23:33', '0', 'pc');
 INSERT INTO `foo_statistics` VALUES ('122', '127.0.0.1', '2018-01-11 14:23:34', '0', 'pc');
 INSERT INTO `foo_statistics` VALUES ('123', '127.0.0.1', '2018-01-11 14:23:42', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('124', '127.0.0.1', '2018-01-11 16:16:23', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('125', '127.0.0.1', '2018-01-11 16:16:33', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('126', '127.0.0.1', '2018-01-11 17:34:01', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('127', '127.0.0.1', '2018-01-12 10:52:55', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('128', '127.0.0.1', '2018-01-12 13:52:00', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('129', '127.0.0.1', '2018-01-12 15:05:57', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('130', '127.0.0.1', '2018-01-15 09:39:05', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('131', '127.0.0.1', '2018-01-15 09:39:13', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('132', '127.0.0.1', '2018-01-15 09:39:14', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('133', '127.0.0.1', '2018-01-15 09:39:14', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('134', '127.0.0.1', '2018-01-15 09:39:15', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('135', '127.0.0.1', '2018-01-15 09:39:15', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('136', '127.0.0.1', '2018-01-15 09:39:15', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('137', '127.0.0.1', '2018-01-15 09:39:16', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('138', '127.0.0.1', '2018-01-15 09:39:19', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('139', '127.0.0.1', '2018-01-15 09:39:20', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('140', '127.0.0.1', '2018-01-15 09:39:23', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('141', '127.0.0.1', '2018-01-15 09:39:25', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('142', '127.0.0.1', '2018-01-16 14:31:08', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('143', '127.0.0.1', '2018-01-16 14:44:39', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('144', '127.0.0.1', '2018-01-16 14:44:42', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('145', '127.0.0.1', '2018-01-16 15:46:48', '0', 'pc');
+INSERT INTO `foo_statistics` VALUES ('146', '127.0.0.1', '2018-01-17 10:09:18', '0', 'pc');
 
 -- ----------------------------
 -- Table structure for foo_web_config

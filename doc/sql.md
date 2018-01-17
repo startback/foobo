@@ -9,6 +9,7 @@
 * 6、 [foo_statistics(统计)](#6)
 * 7、 [foo_web_config(页面配置)](#7)
 * 8、 [foo_action_over(集锦)](#8)
+* 9、 [foo_players(球队)](#9)
 
 -----------------
 <span id="1"/>
@@ -16,16 +17,14 @@
 
 | 字段名 | 类型 | 默认 | 主键 | 备注 |
 |-------|------|------|-----|------|
-| act_id | int | - | key auto | ID |
+| act_id | varchar | 15 | key | ID |
 | act_name | varchar(32) | - | - | 直播赛事名 (如西甲等) |
 | act_time | datetime | - | - | 直播时间 |
 | act_platform | text | - | - | 平台及地址 {1:{'name':'','url':'http://ddd'},...} |
 | left_num | smallint | 0 | - | 左队得分 |
 | right_num | smallint | 0 | - | 右队得分 |
-| left_player | varchar(32) | - | - | 左队名 |
-| right_player | varchar(32) | - | - | 右队名 |
-| left_player_logo | varchar(255) | - | - | 左队LOGO |
-| right_player_logo | varchar(255) | - | - | 右队LOGO |
+| left_p_id | int | - | - | 左队ID |
+| right_p_id | int | - | - | 右队ID |
 | add_time | datetime | - | - | 添加时间 |
 | admin_id | int | - | - | 管理员ID |
 | type_id | smallint | - | - | 类型ID |
@@ -129,3 +128,16 @@
 | is_hot | tinyint | - | - | 是否热门 0:否 1:是 |
 | is_good | tinyint | - | - | 是否精华 0:否 1:是 |
 | is_del | tinyint | - | - | 是否删除 0:否 1:是 |
+
+
+<span id="9"/>
+##### 9、 foo_players(球队)
+
+| 字段名 | 类型 | 默认 | 主键 | 备注 |
+|-------|------|------|-----|------|
+| p_id | int | - | key | 队ID |
+| p_name | varchar | 32 | - | 队名 |
+| p_desc | text | - | - | 队介绍 |
+| p_logo | varchar | 255 | - | 队LOGO |
+| add_time | datetime | - | - | 添加时间 |
+| admin_id | int | - | - | 管理员ID |

@@ -43,9 +43,8 @@ class ActionModel extends Model {
 	
     //增加直播
 	public function action_add($data){
-		$in_id = M('action')->add($data);
-        if($in_id){
-			D('admin_log')->admin_log('增加直播，编号为:'.$in_id);
+        if(M('action')->add($data)){
+			D('admin_log')->admin_log('增加直播，编号为:'.$data['act_id']);
             return true;
         }else{
             return false;
@@ -54,7 +53,7 @@ class ActionModel extends Model {
 
     //修改直播类型
     public function action_edit($act_id,$data){
-        if(M('action')->where('act_id='.$act_id)->save($data)){
+        if(M('action')->where("act_id='".$act_id."'")->save($data)){
 			D('admin_log')->admin_log('修改直播，编号为:'.$act_id);
             return true;
         }else{
