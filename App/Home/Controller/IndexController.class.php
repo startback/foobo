@@ -86,6 +86,15 @@ class IndexController extends CommonController {
 		$info = array();
 		if($act_id){
 			
+			//球队列表
+			$players_arr = array();
+			$players = M('players')->select();
+			if($players){
+				foreach($players as $val){
+					$players_arr[$val['p_id']] = $val;
+				}
+			}				
+			
 			$where = C('DB_PREFIX').'action.act_id='.$act_id;
 			$info = M('action')->field(C('DB_PREFIX').'action.*,'.C('DB_PREFIX').'action_type.type_name,'.C('DB_PREFIX').'action_type.type_desc')->join(C('DB_PREFIX').'action_type ON '.C('DB_PREFIX').'action.type_id = '.C('DB_PREFIX').'action_type.type_id')->where($where)->find();	
 			
@@ -96,6 +105,13 @@ class IndexController extends CommonController {
 					$info['act_desc'] .= $val['name']." ";
 				}			
 			}
+		
+			if($players_arr){
+				$info['left_player'] = $players_arr[$info['left_p_id']]['p_name'];
+				$info['left_player_logo'] = $players_arr[$info['left_p_id']]['p_logo'];
+				$info['right_player'] = $players_arr[$info['right_p_id']]['p_name'];
+				$info['right_player_logo'] = $players_arr[$info['right_p_id']]['p_logo'];					
+			}		
 		
 			if($info['is_over'] == 1) $info['act_desc'] = $info['left_num'].":".$info['right_num'];
 				
