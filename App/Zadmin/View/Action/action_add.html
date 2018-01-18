@@ -27,11 +27,11 @@
             </div>
             <div class="form-group">
                 <div class="label">
-                    <label>左队：</label>
+                    <label>左队名：</label>
                 </div>
                 <div class="field">
-                    <select name="left_p_id" class="input w50" data-validate="required:请选择球队">
-                        <option value="">请选择球队</option>
+                    <select name="left_p_id" class="input w50">
+                        <option value="">请选择球队或下面填写</option>
                         <volist name="players" id="vo">
                             <option value="{$vo.p_id}">{$vo.p_name}</option>
                         </volist>
@@ -41,11 +41,20 @@
             </div>			
             <div class="form-group">
                 <div class="label">
-                    <label>右队：</label>
+                    <label>左队名填写：</label>
                 </div>
                 <div class="field">
-                    <select name="right_p_id" class="input w50" data-validate="required:请选择球队">
-                        <option value="">请选择球队</option>
+                    <input type="text" class="input w50" value="" name="left_name" />
+                    <div class="tips"></div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>右队名：</label>
+                </div>
+                <div class="field">
+                    <select name="right_p_id" class="input w50" >
+                        <option value="">请选择球队或下面填写</option>
                         <volist name="players" id="vo">
                             <option value="{$vo.p_id}">{$vo.p_name}</option>
                         </volist>
@@ -53,6 +62,15 @@
                     <div class="tips"></div>
                 </div>
             </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>右队名填写：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="" name="right_name" />
+                    <div class="tips"></div>
+                </div>
+            </div>				
             <div class="form-group">
                 <div class="label">
                     <label>左队得分：</label>
@@ -115,7 +133,17 @@
             <div class="clear"></div>
             <div class="form-group">
                 <div class="label">
-                    <label>当前状态：</label>
+                    <label>状态：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    未开始 <input name="status" checked value="0" type="radio"/>
+                    进行中 <input name="status" value="1" type="radio"/>
+                    已结束 <input name="status" value="2" type="radio"/>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>状态描述：</label>
                 </div>
                 <div class="field">
                     <input type="text" class="input w50" value="" name="status_desc" />
@@ -147,15 +175,6 @@
                 <div class="field" style="padding-top:8px;">
                     否 <input name="is_hot" checked value="0" type="radio"/>
                     是 <input name="is_hot" value="1" type="radio"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="label">
-                    <label>结束：</label>
-                </div>
-                <div class="field" style="padding-top:8px;">
-                    否 <input name="is_over" checked value="0" type="radio"/>
-                    是 <input name="is_over" value="1" type="radio"/>
                 </div>
             </div>
 

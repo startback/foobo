@@ -25,15 +25,17 @@
 | right_num | smallint | 0 | - | 右队得分 |
 | left_p_id | int | - | - | 左队ID |
 | right_p_id | int | - | - | 右队ID |
+| left_name | varchar(32) | - | - | 左队 |
+| right_name | varchar(32) | - | - | 右队 |
 | add_time | datetime | - | - | 添加时间 |
 | admin_id | int | - | - | 管理员ID |
 | type_id | smallint | - | - | 类型ID |
+| status | tinyint | - | - | 0:未开始 1:进行中 2:已结束 |
 | status_desc | varchar(20) | - | - | 赛事状态描述 |
-| is_show | tinyint | - | - | 是否展示 0:否 1:是 |
-| is_over | tinyint | - | - | 是否结束 0:否 1:是 |
-| is_hot | tinyint | - | - | 是否热门 0:否 1:是 |
-| is_good | tinyint | - | - | 是否精华 0:否 1:是 |
-| is_del | tinyint | - | - | 是否删除 0:否 1:是 |
+| is_show | tinyint | 1 | - | 是否展示 0:否 1:是 |
+| is_hot | tinyint | 0 | - | 是否热门 0:否 1:是 |
+| is_good | tinyint | 0 | - | 是否精华 0:否 1:是 |
+| is_del | tinyint | 0 | - | 是否删除 0:否 1:是 |
 
 
 <span id="2"/>

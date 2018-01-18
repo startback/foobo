@@ -84,7 +84,7 @@ class ActionController extends CommonController {
         $is_show = isset($_GET['is_show'])?$_GET['is_show']:'-1';
         $is_good = isset($_GET['is_good'])?$_GET['is_good']:'-1';
         $is_hot = isset($_GET['is_hot'])?$_GET['is_hot']:'-1';
-        $is_over = isset($_GET['is_over'])?$_GET['is_over']:'-1';
+        $status = isset($_GET['status'])?$_GET['status']:'-1';
         $type_id = isset($_GET['type_id'])?$_GET['type_id']:'-1';
         $keywords = isset($_GET['keywords'])?$_GET['keywords']:'';
 
@@ -92,14 +92,14 @@ class ActionController extends CommonController {
         if($is_show != '-1') $where .= ' and is_show='.$is_show;
         if($is_good != '-1') $where .= ' and is_good='.$is_good;
         if($is_hot != '-1') $where .= ' and is_hot='.$is_hot;
-        if($is_over != '-1') $where .= ' and is_over='.$is_over;
+        if($status != '-1') $where .= ' and status='.$status;
         if($type_id != '-1') $where .= ' and type_id='.$type_id;
         if($keywords) $where .= " and act_name like '%".$keywords."%'";
 
         $search_state['is_show'] = $is_show;
         $search_state['is_good'] = $is_good;
         $search_state['is_hot'] = $is_hot;
-        $search_state['is_over'] = $is_over;
+        $search_state['status'] = $status;
         $search_state['type_id'] = $type_id;
         $search_state['keywords'] = $keywords;
 
@@ -121,11 +121,25 @@ class ActionController extends CommonController {
 			foreach($action_list as $key=>$value){
 				if($value['act_platform']) $action_list[$key]['act_platform_arr'] = json_decode($value['act_platform'],true);
 				if($players_arr){
-					$action_list[$key]['left_player'] = $players_arr[$value['left_p_id']]['p_name'];
-					$action_list[$key]['left_player_logo'] = $players_arr[$value['left_p_id']]['p_logo'];
-					$action_list[$key]['right_player'] = $players_arr[$value['right_p_id']]['p_name'];
-					$action_list[$key]['right_player_logo'] = $players_arr[$value['right_p_id']]['p_logo'];					
+					if($value['left_p_id']){
+						$action_list[$key]['left_player'] = $players_arr[$value['left_p_id']]['p_name'];
+						$action_list[$key]['left_player_logo'] = $players_arr[$value['left_p_id']]['p_logo'];
+					}
+					if($value['right_p_id']){
+						$action_list[$key]['right_player'] = $players_arr[$value['right_p_id']]['p_name'];
+						$action_list[$key]['right_player_logo'] = $players_arr[$value['right_p_id']]['p_logo'];	
+					}					
 				}
+				
+				if($value['left_p_id'] == 0){
+					$action_list[$key]['left_player'] = $value['left_name'];
+					$action_list[$key]['left_player_logo'] = "/Public/images/foot_default.png";
+				}
+				if($value['right_p_id'] == 0){
+					$action_list[$key]['right_player'] = $value['right_name'];
+					$action_list[$key]['right_player_logo'] = "/Public/images/foot_default.png";
+				}				
+				
 			}
 		}
 
@@ -168,11 +182,13 @@ class ActionController extends CommonController {
             $data['act_time'] = isset($_POST['act_time'])?trim($_POST['act_time']):'';
             $data['is_good'] = isset($_POST['is_good'])?intval($_POST['is_good']):0;
             $data['is_hot'] = isset($_POST['is_hot'])?intval($_POST['is_hot']):0;
-            $data['is_show'] = isset($_POST['is_show'])?intval($_POST['is_show']):0;
-            $data['is_over'] = isset($_POST['is_over'])?intval($_POST['is_over']):0;
+            $data['is_show'] = isset($_POST['is_show'])?intval($_POST['is_show']):1;
+            $data['status'] = isset($_POST['status'])?intval($_POST['status']):0;
             $data['add_time'] = date('Y-m-d H:i:s',time());
             $data['admin_id'] = $_SESSION['zadmin']['info']['admin_id'];
 
+			$data['left_name'] = isset($_POST['left_name'])?trim($_POST['left_name']):'';
+			$data['right_name'] = isset($_POST['right_name'])?trim($_POST['right_name']):'';
 			$data['left_num'] = isset($_POST['left_num'])?intval($_POST['left_num']):0;
 			$data['right_num'] = isset($_POST['right_num'])?intval($_POST['right_num']):0;
 			$data['left_p_id'] = isset($_POST['left_p_id'])?intval($_POST['left_p_id']):0;
@@ -211,7 +227,7 @@ class ActionController extends CommonController {
         if($_POST){
             $act_id = isset($_POST['act_id'])?trim($_POST['act_id']):'';
 	
-			if(!M('action')->where("act_id='".$data['act_id']."'")->find()){
+			if(!M('action')->where("act_id='".$act_id."'")->find()){
 				$this->error('没有此直播');
 				exit;
 			}
@@ -221,9 +237,11 @@ class ActionController extends CommonController {
             $data['act_time'] = isset($_POST['act_time'])?trim($_POST['act_time']):'';
             $data['is_good'] = isset($_POST['is_good'])?intval($_POST['is_good']):0;
             $data['is_hot'] = isset($_POST['is_hot'])?intval($_POST['is_hot']):0;
-            $data['is_show'] = isset($_POST['is_show'])?intval($_POST['is_show']):0;
-            $data['is_over'] = isset($_POST['is_over'])?intval($_POST['is_over']):0;
+            $data['is_show'] = isset($_POST['is_show'])?intval($_POST['is_show']):1;
+            $data['status'] = isset($_POST['status'])?intval($_POST['status']):0;
 
+			$data['left_name'] = isset($_POST['left_name'])?trim($_POST['left_name']):'';
+			$data['right_name'] = isset($_POST['right_name'])?trim($_POST['right_name']):'';			
 			$data['left_num'] = isset($_POST['left_num'])?intval($_POST['left_num']):0;
 			$data['right_num'] = isset($_POST['right_num'])?intval($_POST['right_num']):0;
 			$data['left_p_id'] = isset($_POST['left_p_id'])?intval($_POST['left_p_id']):0;

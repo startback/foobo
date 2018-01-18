@@ -17,8 +17,8 @@
 <div class="top"> 
 	<a href="index.php?m=Home&c=index&a=index" class="on">直播</a>
 	<a href="index.php?m=Home&c=index&a=aover" class="nav">集锦</a>
-	<a href="javascript:void();" class="nav">资讯</a>
-	<a href="javascript:void();" class="nav">商城</a>
+	<a href="javascript:void(0);" class="nav">资讯</a>
+	<a href="javascript:void(0);" class="nav">商城</a>
 </div>
 
 <div class="module">
@@ -52,15 +52,7 @@
 									<div><b>{$vo.right_player}</b></div>
 								</td>
 								<td class="td_5">
-									<div class="remind">
-									<if condition="$vo.is_start eq 1 and $vo.is_over eq 0">
-										直播中
-									<elseif condition="$vo.is_over eq 1"/>
-										已结束	
-									<else /> 
-										<img src="__PUBLIC__/Home/images/clock1.png">
-									</if>
-									</div>
+									<div class="remind">{$vo.status_desc}</div>
 									<div class="hidentime" style="display:none;">{$vo.act_time}</div>
 									<div class="isover" style="display:none;">{$vo.is_over}</div>
 								</td>
@@ -99,7 +91,11 @@
 	
 	}
 	
-	setInterval("set_show()",5000);
+	function get_new(){
+		location.reload();
+	}
+	
+	setInterval("get_new()",5000);
 </script>
 
 

@@ -18,11 +18,12 @@
                         <option <if condition="$search_state['is_show'] eq 0">selected='selected'</if> value="0">否</option>
                     </select>
                     &nbsp;&nbsp;
-                    结束
-                    <select name="is_over" class="input" style="width:60px; line-height:17px;display:inline-block">
+                    状态
+                    <select name="status" class="input" style="width:60px; line-height:17px;display:inline-block">
                         <option value="-1">选择</option>
-                        <option <if condition="$search_state['is_over'] eq 1">selected='selected'</if> value="1">是</option>
-                        <option <if condition="$search_state['is_over'] eq 0">selected='selected'</if> value="0">否</option>
+                        <option <if condition="$search_state['status'] eq 0">selected='selected'</if> value="0">未开始</option>
+                        <option <if condition="$search_state['status'] eq 1">selected='selected'</if> value="1">进行中</option>
+                        <option <if condition="$search_state['status'] eq 2">selected='selected'</if> value="2">已结束</option>
                     </select>
                     &nbsp;&nbsp;
                     精华

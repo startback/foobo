@@ -44,14 +44,27 @@ class IndexController extends CommonController {
 		if($act_l){
 			foreach($act_l as $value){			
 				if($players_arr){
-					$value['left_player'] = $players_arr[$value['left_p_id']]['p_name'];
-					$value['left_player_logo'] = $players_arr[$value['left_p_id']]['p_logo'];
-					$value['right_player'] = $players_arr[$value['right_p_id']]['p_name'];
-					$value['right_player_logo'] = $players_arr[$value['right_p_id']]['p_logo'];					
+					if($value['left_p_id']){
+						$value['left_player'] = $players_arr[$value['left_p_id']]['p_name'];
+						$value['left_player_logo'] = $players_arr[$value['left_p_id']]['p_logo'];
+					}
+					if($value['right_p_id']){
+						$value['right_player'] = $players_arr[$value['right_p_id']]['p_name'];
+						$value['right_player_logo'] = $players_arr[$value['right_p_id']]['p_logo'];	
+					}					
 				}				
 
+				if($value['left_p_id'] == 0){
+					$value['left_player'] = $value['left_name'];
+					$value['left_player_logo'] = "/Public/images/foot_default.png";
+				}
+				if($value['right_p_id'] == 0){
+					$value['right_player'] = $value['right_name'];
+					$value['right_player_logo'] = "/Public/images/foot_default.png";
+				}				
+				
 				$value['act_desc'] = '';
-				if($value['is_over'] == 1){
+				if($value['status'] == 2){
 					$value['act_desc'] = $value['left_num'].":".$value['right_num'];
 				}else{
 					if($value['act_platform']){
@@ -107,13 +120,26 @@ class IndexController extends CommonController {
 			}
 		
 			if($players_arr){
-				$info['left_player'] = $players_arr[$info['left_p_id']]['p_name'];
-				$info['left_player_logo'] = $players_arr[$info['left_p_id']]['p_logo'];
-				$info['right_player'] = $players_arr[$info['right_p_id']]['p_name'];
-				$info['right_player_logo'] = $players_arr[$info['right_p_id']]['p_logo'];					
+				if($info['left_p_id']){
+					$info['left_player'] = $players_arr[$info['left_p_id']]['p_name'];
+					$info['left_player_logo'] = $players_arr[$info['left_p_id']]['p_logo'];
+				}
+				if($info['right_p_id']){
+					$info['right_player'] = $players_arr[$info['right_p_id']]['p_name'];
+					$info['right_player_logo'] = $players_arr[$info['right_p_id']]['p_logo'];	
+				}				
 			}		
 		
-			if($info['is_over'] == 1) $info['act_desc'] = $info['left_num'].":".$info['right_num'];
+			if($info['left_p_id'] == 0){
+				$info['left_player'] = $info['left_name'];
+				$info['left_player_logo'] = "/Public/images/foot_default.png";
+			}
+			if($info['right_p_id'] == 0){
+				$info['right_player'] = $info['right_name'];
+				$info['right_player_logo'] = "/Public/images/foot_default.png";
+			}		
+		
+			if($info['status'] == 2) $info['act_desc'] = $info['left_num'].":".$info['right_num'];
 				
 		}
 		

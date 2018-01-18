@@ -14,19 +14,21 @@
 |-------|------|---------|-------|
 | do_id | int | yes | 0写入 1更新 |
 | act_id | str | yes | 赛事ID(最多15位) |
-| act_name | str | yes | 赛事名（如西超） |
-| type_id | int | yes | 类型ID（不确定先填0） |
-| act_time | str | yes | 赛事时间 |
-| is_good | int | yes | 精华 0否1是 |
-| is_hot | int | yes | 热门 0否1是 |
-| is_show | int | yes | 展示 0否1是 |
-| is_over | int | yes | 结束 0否1是 |
-| left_num | int | yes | 左队得分 |
-| right_num | int | yes | 右队得分 |
-| left_p_id | str | yes | 左队 |
-| right_p_id | str | yes | 右队 |
+| act_name | str | no | 赛事名（如西超） |
+| type_id | int | no | 类型ID（不确定先填0） |
+| act_time | int | no | 赛事时间 时间戳 |
+| is_good | int | no | 精华 0否1是 |
+| is_hot | int | no | 热门 0否1是 |
+| is_show | int | no | 展示 0否1是 |
+| status | int | no | 0未开始 1进行中 2已结束 |
+| left_num | int | no | 左队得分 |
+| right_num | int | no | 右队得分 |
+| left_p_id | int | no | 左队ID |
+| right_p_id | int | no | 右队ID |
+| left_name | str | no | 左队名 |
+| right_name | str | no | 右队名 |
 | status_desc | str | no | 赛事进展状况 |
-| act_platform | str | yes | 平台及播放地址 格式: [{"name":"QQ","url":"111111"},{"name":"TT","url":"55555"}] |
+| act_platform | str | no | 平台及播放地址 格式: [{"name":"QQ","url":"111111"},{"name":"TT","url":"55555"}] |
 
 
 返回：
