@@ -1,0 +1,189 @@
+
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span> 发表直播</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="http://foot.com/index.php?m=api&c=index&a=action_bug">
+
+            <div class="form-group">
+                <div class="label">
+                    <label>DO_ID：</label>
+                </div>
+                <div class="field">
+                    <input type="number" class="input w50" value="1" name="do_id"/>
+                    <div class="tips"></div>
+                </div>
+            </div>			
+		
+            <div class="form-group">
+                <div class="label">
+                    <label>直播ID：</label>
+                </div>
+                <div class="field">
+                    <input type="number" class="input w50" value="12" name="act_id" data-validate="required:请输入直播ID"/>
+                    <div class="tips"></div>
+                </div>
+            </div>		
+            <div class="form-group">
+                <div class="label">
+                    <label>直播赛事名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="好事" name="act_name" data-validate="required:请输入赛事名"/>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>左队名：</label>
+                </div>
+                <div class="field">
+                    <select name="left_p_id" class="input w50">
+                        <option value="-1">请选择球队或下面填写</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                    <div class="tips"></div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>左队名填写：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="左" name="left_name" />
+                    <div class="tips"></div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>右队名：</label>
+                </div>
+                <div class="field">
+                    <select name="right_p_id" class="input w50" >
+                        <option value="-1">请选择球队或下面填写</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                    <div class="tips"></div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>右队名填写：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="右" name="right_name" />
+                    <div class="tips"></div>
+                </div>
+            </div>				
+            <div class="form-group">
+                <div class="label">
+                    <label>左队得分：</label>
+                </div>
+                <div class="field">
+                    <input type="number" class="input w50" value="0" name="left_num" data-validate="required:请输入左队得分"/>
+                    <div class="tips"></div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>右队得分：</label>
+                </div>
+                <div class="field">
+                    <input type="number" class="input w50" value="0" name="right_num" data-validate="required:请输入右队得分"/>
+                    <div class="tips"></div>
+                </div>
+            </div>						
+            <div class="form-group">
+                <div class="label">
+                    <label>比赛时间：</label>
+                </div>
+                <div class="field">
+                    <input type="text" id="datebut" class="input w50" value="1416253947" name="act_time" data-validate="required:请输入时间"/>
+                    <div class="tips"></div>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>直播平台及地址：</label>
+                </div>
+                <div class="field">					
+					<input name="act_platform" class="input w50" type="text" style="color:green;line-height:30px;" value="播不播由你" />
+                </div>		
+            </div>				
+			
+            <div class="form-group">
+                <div class="label">
+                    <label>类别：</label>
+                </div>
+                <div class="field">
+                    <select name="type_id" class="input w50" data-validate="required:请选择类别">
+                        <option value="">请选择类别</option>
+                        <option value="1">0</option>
+                    </select>
+                    <div class="tips"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="form-group">
+                <div class="label">
+                    <label>状态：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    未开始 <input name="status" checked value="0" type="radio"/>
+                    进行中 <input name="status" value="1" type="radio"/>
+                    已结束 <input name="status" value="2" type="radio"/>
+                </div>
+            </div>			
+            <div class="form-group">
+                <div class="label">
+                    <label>状态描述：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" value="" name="status_desc" />
+                </div>
+            </div>				
+			
+            <div class="form-group">
+                <div class="label">
+                    <label>展示：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    否 <input name="is_show" value="0" type="radio"/>
+                    是 <input name="is_show" checked value="1" type="radio"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>精华：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    否 <input name="is_good" checked value="0" type="radio"/>
+                    是 <input name="is_good" value="1" type="radio"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label>热门：</label>
+                </div>
+                <div class="field" style="padding-top:8px;">
+                    否 <input name="is_hot" checked value="0" type="radio"/>
+                    是 <input name="is_hot" value="1" type="radio"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 发布</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
