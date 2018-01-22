@@ -215,18 +215,18 @@ class AdminController extends CommonController {
             if($ids == 1){
 				$data['status'] = 2;
 				$data['info'] = '无权删除admin管理员';
-            }
-
-            $check_ids = explode(',',$ids);
-            if(in_array(1,$check_ids)){
-				$data['status'] = 2;
-				$data['info'] = '无权删除admin管理员';
-            }
-
-            if(D('admin')->del_admin($ids)){
-                $data['status'] = 1;
-                $data['info'] = '删除成功';
-            }
+            }else{
+				$check_ids = explode(',',$ids);
+				if(in_array(1,$check_ids)){
+					$data['status'] = 2;
+					$data['info'] = '无权删除admin管理员';
+				}else{
+					if(M('admin')->where('admin_id in ('.$ids.')')->delete()){
+						$data['status'] = 1;
+						$data['info'] = '删除成功';
+					}
+				}
+			}
         }
 		echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
