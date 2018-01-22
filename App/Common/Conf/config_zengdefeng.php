@@ -20,4 +20,9 @@ return array(
     'URL_MODEL'             =>  0,            // url模式 0普通 1PATHINFO 2REWRITE 3兼容
     'MODULE_ALLOW_LIST'     =>  array('Home','Myadmin','Api'),   // 允许访问的模块
     'DEFAULT_MODULE'        =>  'Home',                    // 默认模块
+	//系统缓存
+	'DATA_CACHE_TYPE'       =>  'Redis',
+	'REDIS_HOST'            =>  '127.0.0.1',
+	'REDIS_PORT'            =>  6379,
+	'DATA_CACHE_TIME'       =>  3600,	
 );
