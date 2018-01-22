@@ -88,11 +88,15 @@ class AdminController extends CommonController {
     //删除角色
     public function role_del(){
         $ids = isset($_POST['ids'])?$_POST['ids']:'';
+		$data['status'] = 0;
+		$data['info'] = '删除失败';			
         if($ids){
             if(D('admin')->del_role($ids)){
-                echo 1;
+                $data['status'] = 1;
+                $data['info'] = '删除成功';
             }
         }
+		echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
 
 
@@ -131,7 +135,8 @@ class AdminController extends CommonController {
         if($_POST){
             $data['admin_account'] = trim($_POST['admin_account']);
             $data['admin_pass'] = hex2bin(md5(trim($_POST['admin_pass'])));
-            $data['admin_role_id'] = $_POST['admin_role_id'];
+            $data['admin_birthday'] = date('Y-m-d',0);
+            $data['admin_role_id'] = intval($_POST['admin_role_id']);
             $data['admin_register_time'] = date('Y-m-d H:i:s');
 
             if(D('admin')->add_admin($data)){
@@ -154,11 +159,11 @@ class AdminController extends CommonController {
             $admin_id = $_POST['admin_id'];
 
             $data['admin_name'] = trim($_POST['admin_name']);
-            $data['admin_sex'] = $_POST['admin_sex'];
-            $data['admin_role_id'] = $_POST['admin_role_id'];
-            $data['admin_phone'] = $_POST['admin_phone'];
+            $data['admin_sex'] = intval($_POST['admin_sex']);
+            $data['admin_role_id'] = intval($_POST['admin_role_id']);
+            $data['admin_phone'] = trim($_POST['admin_phone']);
             $data['admin_email'] = trim($_POST['admin_email']);
-            $data['admin_birthday'] = $_POST['admin_birthday'];
+            $data['admin_birthday'] = empty($_POST['admin_birthday'])?date('Y-m-d',0):trim($_POST['admin_birthday']);
             $data['admin_tag'] = trim($_POST['admin_tag']);
 
             if(D('admin')->edit_admin($admin_id,$data)){
@@ -204,22 +209,26 @@ class AdminController extends CommonController {
     //删除管理员
     public function admin_del(){
         $ids = isset($_POST['ids'])?$_POST['ids']:'';
+		$data['status'] = 0;
+		$data['info'] = '删除失败';			
         if($ids){
             if($ids == 1){
-                echo 2;
-                exit;
+				$data['status'] = 2;
+				$data['info'] = '无权删除admin管理员';
             }
 
             $check_ids = explode(',',$ids);
             if(in_array(1,$check_ids)){
-                echo 2;
-                exit;
+				$data['status'] = 2;
+				$data['info'] = '无权删除admin管理员';
             }
 
             if(D('admin')->del_admin($ids)){
-                echo 1;
+                $data['status'] = 1;
+                $data['info'] = '删除成功';
             }
         }
+		echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
 
 

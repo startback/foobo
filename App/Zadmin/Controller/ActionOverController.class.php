@@ -112,11 +112,15 @@ class ActionOverController extends CommonController {
     //删除集锦
     public function over_del(){
         $ids = isset($_POST['ids'])?$_POST['ids']:'';
+		$data['status'] = 0;
+		$data['info'] = '删除失败';		
         if($ids){
             if(D('action_over')->over_del($ids)){
-                echo 1;
+                $data['status'] = 1;
+                $data['info'] = '删除成功';
             }
         }
+		echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
 
 

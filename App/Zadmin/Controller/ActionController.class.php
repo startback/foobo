@@ -69,11 +69,15 @@ class ActionController extends CommonController {
     //删除直播分类
     public function del_type(){
         $ids = isset($_POST['ids'])?$_POST['ids']:'';
+		$data['status'] = 0;
+		$data['info'] = '删除失败';			
         if($ids){
 			if(D('action')->del_type($ids)){
-				echo 1;
+                $data['status'] = 1;
+                $data['info'] = '删除成功';
 			}
         }
+		echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
 
 
@@ -298,11 +302,15 @@ class ActionController extends CommonController {
     //删除直播
     public function action_del(){
         $ids = isset($_POST['ids'])?$_POST['ids']:'';
+		$data['status'] = 0;
+		$data['info'] = '删除失败';			
         if($ids){
             if(D('action')->action_del($ids)){
-                echo 1;
+                $data['status'] = 1;
+                $data['info'] = '删除成功';
             }
         }
+		echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
 
 
@@ -396,12 +404,15 @@ class ActionController extends CommonController {
 	public function players_del(){
 		
         $ids = isset($_POST['ids'])?$_POST['ids']:'';
+		$data['status'] = 0;
+		$data['info'] = '删除失败';			
         if($ids){
             if(D('players')->players_del($ids)){
-                echo 1;
+                $data['status'] = 1;
+                $data['info'] = '删除成功';
             }
         }		
-		
+		echo json_encode($data,JSON_UNESCAPED_UNICODE);
 	}
 
 
